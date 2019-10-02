@@ -1,7 +1,7 @@
 "use strict";
 
-let S = 'The goal is to count the number of SMS messages needed to accommodate';
-let K = 12;
+let S = 'The goal is to';
+let K = 4;
 
 function solution(S, K) {
 
@@ -28,8 +28,8 @@ function solution(S, K) {
     
             items.push(item);
     
-            sum += wordLength[i];
-            if ( sum > K) break;
+            sum += wordLength[i] + 1;
+            if ( sum > K + 1 ) break;
                 
         }
         // console.log(sum);
