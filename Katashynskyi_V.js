@@ -1,58 +1,33 @@
-"use strict";
-
-let S = 'The goal is to';
-let K = 4;
 
 function solution(S, K) {
+    const arrWords = S.split(' ').map((el) => el.length);
+    const largestWord = Math.max(...arrWords);
+    if ( largestWord > K) { return -1; }
 
-    const arr = S.split(' ');
+    let countMassenge = 0;
+    let testArr = [];
+    let i = testArr.length;
 
-    const wordLength = arr.map(item => item.length);
-
-    let largestWord = Math.max( ...wordLength );
-    
-    let sum = 0;
-    let items = [];
-    let numMassenge = 0;
-
-    let i = items.length;
-
-    function counter() {
-        numMassenge++;
-
-        for ( ; i < wordLength.length; i++) {
-
-            let item = function() {
-                console.log(i);
-            }
-    
-            items.push(item);
-    
-            sum += wordLength[i] + 1;
-            if ( sum > K + 1 ) break;
-                
+    function counterMessege() {
+        countMassenge++;
+        let sumLetter = 0;
+        
+        for ( ; i < arrWords.length; i++) {
+            testArr.push(i);
+            sumLetter += arrWords[i] + 1;
+            if ( sumLetter > K + 1 ) { testArr.pop(); break;}              
         }
-        // console.log(sum);
-        // console.log(items);
     }
 
-    function recycle() {
-        counter();
-
-        if (arr.length > items.length ) {
-            recycle();
+    function checkEndText() {
+        counterMessege();
+        if (arrWords.length > testArr.length ) {
+         checkEndText();
         }        
     }
-    recycle();
-    // console.log(wordLength);
+    checkEndText();
 
-    return (
-        (function() {   
-            if ( largestWord > K) {
-                return console.log(-1);
-            } else { console.log(numMassenge);}
-        } ())
-    );   
+    return countMassenge;
 }
 
-solution(S, K);
+console.log(solution('SMS messages are really short', 12));
